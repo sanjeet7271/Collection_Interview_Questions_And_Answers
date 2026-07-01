@@ -1,4 +1,4 @@
-# Java Heap Memory and String Constant Pool - Tricky Questions and Answers
+# Java Heap Memory and String Constant Pool - 20 Tricky Questions and Answers
 
 ## 1. How many objects are created?
 
@@ -9,6 +9,11 @@ String s2 = "Java";
 
 **Answer:** 1 object
 
+**Explanation:** Both references point to the same object in the String
+Constant Pool (SCP).
+
+------------------------------------------------------------------------
+
 ## 2. How many objects are created?
 
 ``` java
@@ -16,6 +21,11 @@ String s1 = new String("Java");
 ```
 
 **Answer:** 2 objects
+
+1.  `"Java"` in SCP
+2.  Heap object created by `new String()`
+
+------------------------------------------------------------------------
 
 ## 3. How many objects are created?
 
@@ -25,6 +35,12 @@ String s2 = new String("Java");
 ```
 
 **Answer:** 3 objects
+
+1.  `"Java"` in SCP
+2.  Heap object for `s1`
+3.  Heap object for `s2`
+
+------------------------------------------------------------------------
 
 ## 4. Output?
 
@@ -43,6 +59,8 @@ true
 true
 ```
 
+------------------------------------------------------------------------
+
 ## 5. Output?
 
 ``` java
@@ -60,6 +78,8 @@ false
 true
 ```
 
+------------------------------------------------------------------------
+
 ## 6. Output?
 
 ``` java
@@ -75,7 +95,9 @@ Output:
 false
 ```
 
-## 7. intern() example
+------------------------------------------------------------------------
+
+## 7. What happens with intern()?
 
 ``` java
 String s1 = new String("Java");
@@ -90,7 +112,9 @@ Output:
 false
 ```
 
-## 8. intern() with SCP
+------------------------------------------------------------------------
+
+## 8. Output?
 
 ``` java
 String s1 = "Java";
@@ -104,6 +128,8 @@ Output:
 ``` text
 true
 ```
+
+------------------------------------------------------------------------
 
 ## 9. Compile Time Concatenation
 
@@ -119,6 +145,8 @@ Output:
 ``` text
 true
 ```
+
+------------------------------------------------------------------------
 
 ## 10. Runtime Concatenation
 
@@ -136,7 +164,9 @@ Output:
 false
 ```
 
-## 11. final keyword optimization
+------------------------------------------------------------------------
+
+## 11. final Keyword Optimization
 
 ``` java
 final String s1 = "Ja";
@@ -152,7 +182,9 @@ Output:
 true
 ```
 
-## 12. equals vs ==
+------------------------------------------------------------------------
+
+## 12. Output?
 
 ``` java
 String s1 = "Java";
@@ -160,7 +192,61 @@ String s2 = "Ja";
 String s3 = "va";
 
 System.out.println(s1 == s2 + s3);
+```
+
+Output:
+
+``` text
+false
+```
+
+------------------------------------------------------------------------
+
+## 13. Output?
+
+``` java
+String s1 = "Java";
+String s2 = "Ja";
+String s3 = "va";
+
 System.out.println(s1.equals(s2 + s3));
+```
+
+Output:
+
+``` text
+true
+```
+
+------------------------------------------------------------------------
+
+## 14. Heap vs Stack vs SCP
+
+``` java
+public class Test {
+    public static void main(String[] args) {
+        String s1 = "Java";
+        String s2 = new String("Java");
+    }
+}
+```
+
+-   Stack stores references.
+-   Heap stores objects.
+-   SCP stores string literals.
+
+------------------------------------------------------------------------
+
+## 15. Tricky Interview Question
+
+``` java
+String s1 = new String("Hello");
+String s2 = "Hello";
+String s3 = s1.intern();
+
+System.out.println(s1 == s2);
+System.out.println(s2 == s3);
+System.out.println(s1 == s3);
 ```
 
 Output:
@@ -168,23 +254,44 @@ Output:
 ``` text
 false
 true
+false
 ```
 
-## 13. Heap vs Stack vs SCP
+------------------------------------------------------------------------
 
--   Stack stores references.
--   Heap stores objects.
--   SCP stores string literals.
-
-## 14. intern() comparison
+## 16. How many objects?
 
 ``` java
-String s1 = new String("Hello");
-String s2 = "Hello";
-String s3 = s1.intern();
+String s1 = new String("A") + new String("B");
 ```
 
-## 15. String immutability
+**Answer:** Typically 5 objects plus a temporary StringBuilder object.
+
+------------------------------------------------------------------------
+
+## 17. Frequently Asked Interview Question
+
+``` java
+String s1 = "abc";
+String s2 = new String("abc");
+String s3 = s2.intern();
+
+System.out.println(s1 == s2);
+System.out.println(s1 == s3);
+System.out.println(s2 == s3);
+```
+
+Output:
+
+``` text
+false
+true
+false
+```
+
+------------------------------------------------------------------------
+
+## 18. String Immutability
 
 ``` java
 String s1 = "Java";
@@ -199,7 +306,9 @@ Output:
 Java
 ```
 
-## 16. String reassignment
+------------------------------------------------------------------------
+
+## 19. String Reassignment
 
 ``` java
 String s1 = "Java";
@@ -213,6 +322,18 @@ Output:
 ``` text
 Java8
 ```
+
+------------------------------------------------------------------------
+
+## 20. Why is String Immutable?
+
+-   Enables String Constant Pool optimization.
+-   Improves security.
+-   Makes String thread-safe.
+-   Allows hash code caching.
+-   Makes String suitable as keys in HashMap.
+
+------------------------------------------------------------------------
 
 ## Interview Summary
 
