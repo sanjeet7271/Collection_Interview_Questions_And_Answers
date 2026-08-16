@@ -32,4 +32,5 @@ Hashtable is a legacy synchronized Map implementation. Internally, it uses an ar
                                              v
                                       Linked List
 
+<img width="1024" height="1536" alt="ChatGPT Image Aug 16, 2026, 04_03_29 PM" src="https://github.com/user-attachments/assets/867eb91e-65f5-414c-a007-5367756fe530" />
 
